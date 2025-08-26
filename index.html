@@ -4,58 +4,112 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Caleb Amartey Amarh - Portfolio</title>
+  <!-- Favicon Placeholder -->
+  <link rel="icon" href="caleb-profile.jpg" type="image/x-icon">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Open Sans Font -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Open Sans', sans-serif; /* Changed to Open Sans */
-      scroll-behavior: smooth;
-      /* Ensure full height for smooth section transitions */
-      min-height: 100vh;
-      background-color: #F0EDED; /* Linen */
-      color: #202020; /* Slate */
+    /* CSS Variables for Light Mode (from Custom Palette) */
+    :root {
+      --bg-primary: #F0EDED; /* Linen */
+      --text-primary: #202020; /* Slate */
+      --text-primary-rgb: 32, 32, 32; /* RGB for rgba calculations */
+      --accent-primary: #B28A79; /* Clay */
+      --accent-primary-rgb: 178, 138, 121; /* RGB for rgba calculations */
+      --accent-hover: #A07A69; /* Darker Clay */
+      --navbar-bg-opacity: 0.8;
+      --glass-bg-base-opacity: 0.5;
+      --glass-border-base-opacity: 0.8;
+      --hero-glass-bg-opacity: 0.4;
+      --project-glass-bg-opacity: 0.6;
+      --project-glass-border-opacity: 0.9;
+      --contact-glass-bg-opacity: 0.7;
+      --contact-glass-border-opacity: 1;
+      --divider-color: #E9D7C8; /* Sand */
+      --footer-bg: #202020; /* Slate */
+      --footer-text: #C7BFB8; /* Stucco */
+      --input-bg: rgba(255, 255, 255, 0.1);
+      --input-placeholder: #505050; /* Darker grey, derived from Slate */
     }
+
+    /* CSS Variables for Dark Mode (Complementary) */
+    html[data-theme="dark"] {
+      --bg-primary: #1A1A1A; /* Darker Slate-like */
+      --text-primary: #F0EDED; /* Linen (as text in dark mode) */
+      --text-primary-rgb: 240, 237, 237; /* RGB for rgba calculations */
+      --accent-primary: #D8B5A7; /* Lighter, desaturated Clay for dark mode */
+      --accent-primary-rgb: 216, 181, 167; /* RGB for rgba calculations */
+      --accent-hover: #C2A494; /* Slightly darker dark mode accent */
+      --navbar-bg-opacity: 0.8;
+      --glass-bg-base-opacity: 0.5;
+      --glass-border-base-opacity: 0.8;
+      --hero-glass-bg-opacity: 0.4;
+      --project-glass-bg-opacity: 0.6;
+      --project-glass-border-opacity: 0.9;
+      --contact-glass-bg-opacity: 0.7;
+      --contact-glass-border-opacity: 1;
+      --divider-color: #404040; /* Darker divider for dark mode */
+      --footer-bg: #0A0A0A; /* Even darker for footer */
+      --footer-text: #A0A0A0; /* Muted light grey */
+      --input-bg: rgba(0, 0, 0, 0.2);
+      --input-placeholder: #B0B0B0;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
     /* Base styles for glassmorphism effect */
     .glassmorphism {
-      background-color: rgba(233, 215, 200, 0.5); /* Sand with 50% opacity */
-      backdrop-filter: blur(15px) brightness(1.05); /* Increased blur for more depth */
-      -webkit-backdrop-filter: blur(15px) brightness(1.05); /* For Safari compatibility */
-      border: 1px solid rgba(233, 215, 200, 0.8); /* Border with higher Sand opacity */
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Softer, lighter shadow */
+      background-color: rgba(var(--text-primary-rgb), var(--glass-bg-base-opacity));
+      backdrop-filter: blur(15px) brightness(1.05);
+      -webkit-backdrop-filter: blur(15px) brightness(1.05);
+      border: 1px solid rgba(var(--text-primary-rgb), var(--glass-border-base-opacity));
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     /* Specific glassmorphism styles for various elements */
-    .navbar-glass-white { /* New class for white glassmorphism header */
-      background-color: rgba(255, 255, 255, 0.7); /* White with 70% opacity */
+    .navbar-glass-white {
+      background-color: rgba(var(--text-primary-rgb), var(--navbar-bg-opacity));
       backdrop-filter: blur(15px) brightness(1.05);
       -webkit-backdrop-filter: blur(15px) brightness(1.05);
-      border: 1px solid rgba(200, 200, 200, 0.5); /* Subtle grey border */
+      border: 1px solid rgba(var(--text-primary-rgb), 0.3);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .hero-glass-text {
-        background-color: rgba(233, 215, 200, 0.4); /* Sand with 40% opacity for text readability */
+        background-color: rgba(var(--text-primary-rgb), var(--hero-glass-bg-opacity));
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(233, 215, 200, 0.6); /* Border with higher Sand opacity */
+        border: 1px solid rgba(var(--text-primary-rgb), 0.6);
+        transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
     .project-glass-card {
-        background-color: rgba(233, 215, 200, 0.6); /* Sand with 60% opacity for content */
+        background-color: rgba(var(--text-primary-rgb), var(--project-glass-bg-opacity));
         backdrop-filter: blur(18px) brightness(1.05);
         -webkit-backdrop-filter: blur(18px) brightness(1.05);
-        border: 1px solid rgba(233, 215, 200, 0.9); /* Border with very high Sand opacity */
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Slightly darker shadow */
+        border: 1px solid rgba(var(--text-primary-rgb), var(--project-glass-border-opacity));
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        transition: background-color 0 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .contact-glass-form {
-        background-color: rgba(233, 215, 200, 0.7); /* Sand with 70% opacity for input clarity */
+        background-color: rgba(var(--text-primary-rgb), var(--contact-glass-bg-opacity));
         backdrop-filter: blur(20px) brightness(1.05);
         -webkit-backdrop-filter: blur(20px) brightness(1.05);
-        border: 1px solid rgba(233, 215, 200, 1); /* Opaque Sand border */
-        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Even darker shadow */
+        border: 1px solid rgba(var(--text-primary-rgb), var(--contact-glass-border-opacity));
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     /* Keyframes for fade-in and slide-up animations */
@@ -79,9 +133,9 @@
     }
 
     /* Custom focus styles for accessibility */
-    .focus-ring-clay:focus {
+    .focus-ring-accent:focus {
       outline: none;
-      box-shadow: 0 0 0 3px rgba(178, 138, 121, 0.5); /* Clay with opacity for focus ring */
+      box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.5);
     }
 
     /* Simple message box styles */
@@ -100,45 +154,59 @@
         opacity: 1;
     }
     .message-box.success {
-        background-color: rgba(178, 138, 121, 0.2); /* Clay for success */
-        color: #B28A79;
-        border: 1px solid #B28A79;
+        background-color: rgba(var(--accent-primary-rgb), 0.2);
+        color: var(--accent-primary);
+        border: 1px solid var(--accent-primary);
     }
     .message-box.error {
-        background-color: rgba(255, 102, 102, 0.2); /* Light red for error */
+        background-color: rgba(255, 102, 102, 0.2);
         color: #ff6666;
         border: 1px solid #ff6666;
     }
   </style>
 </head>
-<body class="bg-[#F0EDED] text-[#202020]">
+<body class="bg-[var(--bg-primary)] text-[var(--text-primary)]">
 
   <!-- Navbar -->
   <nav class="navbar-glass-white p-4 fixed w-full z-10 top-0 rounded-b-xl">
     <div class="container mx-auto flex justify-between items-center">
-      <a href="#" class="flex items-center space-x-2 text-xl md:text-2xl font-bold text-[#202020] rounded-md p-2 hover:bg-[#C7BFB8] hover:bg-opacity-50 transition duration-300 focus:outline-none focus-ring-clay" aria-label="Go to Home section">
-        <!-- Logo Image -->
+      <a href="#" class="flex items-center space-x-2 text-xl md:text-2xl font-bold text-[var(--text-primary)] rounded-md p-2 hover:bg-[rgba(var(--accent-primary-rgb),0.1)] transition duration-300 focus:outline-none focus-ring-accent" aria-label="Go to Home section">
+        <!-- Logo Image Placeholder -->
         <img src="caleb-profile.jpg" alt="Portfolio Logo"
-             class="w-6 h-6 md:w-8 md:h-8 object-cover rounded-full border-2 border-[#B28A79]
+             class="w-6 h-6 md:w-8 md:h-8 object-cover rounded-full border-2 border-[var(--accent-primary)]
                     transform hover:scale-110 transition duration-300 ease-in-out">
         <span>CALEB AMARTEY AMARH</span>
       </a>
-      <div class="space-x-2 md:space-x-4">
-        <a href="#hero" class="text-[#202020] text-sm md:text-base hover:text-[#B28A79] font-medium rounded-md p-2 hover:bg-[#C7BFB8] hover:bg-opacity-50 transition duration-300 focus:outline-none focus-ring-clay">Home</a>
-        <a href="#about" class="text-[#202020] text-sm md:text-base hover:text-[#B28A79] font-medium rounded-md p-2 hover:bg-[#C7BFB8] hover:bg-opacity-50 transition duration-300 focus:outline-none focus-ring-clay">About</a>
-        <a href="#projects" class="text-[#202020] text-sm md:text-base hover:text-[#B28A79] font-medium rounded-md p-2 hover:bg-[#C7BFB8] hover:bg-opacity-50 transition duration-300 focus:outline-none focus-ring-clay">Projects</a>
-        <a href="#contact" class="text-[#202020] text-sm md:text-base hover:text-[#B28A79] font-medium rounded-md p-2 hover:bg-[#C7BFB8] hover:bg-opacity-50 transition duration-300 focus:outline-none focus-ring-clay">Contact</a>
+      <div class="space-x-2 md:space-x-4 flex items-center">
+        <a href="#hero" class="text-[var(--text-primary)] text-sm md:text-base hover:text-[var(--accent-primary)] font-medium rounded-md p-2 hover:bg-[rgba(var(--accent-primary-rgb),0.1)] transition duration-300 focus:outline-none focus-ring-accent">Home</a>
+        <a href="#about" class="text-[var(--text-primary)] text-sm md:text-base hover:text-[var(--accent-primary)] font-medium rounded-md p-2 hover:bg-[rgba(var(--accent-primary-rgb),0.1)] transition duration-300 focus:outline-none focus-ring-accent">About</a>
+        <a href="#resume" class="text-[var(--text-primary)] text-sm md:text-base hover:text-[var(--accent-primary)] font-medium rounded-md p-2 hover:bg-[rgba(var(--accent-primary-rgb),0.1)] transition duration-300 focus:outline-none focus-ring-accent">Resume</a>
+        <a href="#skills" class="text-[var(--text-primary)] text-sm md:text-base hover:text-[var(--accent-primary)] font-medium rounded-md p-2 hover:bg-[rgba(var(--accent-primary-rgb),0.1)] transition duration-300 focus:outline-none focus-ring-accent">Skills</a>
+        <a href="#projects" class="text-[var(--text-primary)] text-sm md:text-base hover:text-[var(--accent-primary)] font-medium rounded-md p-2 hover:bg-[rgba(var(--accent-primary-rgb),0.1)] transition duration-300 focus:outline-none focus-ring-accent">Projects</a>
+        <a href="#contact" class="text-[var(--text-primary)] text-sm md:text-base hover:text-[var(--accent-primary)] font-medium rounded-md p-2 hover:bg-[rgba(var(--accent-primary-rgb),0.1)] transition duration-300 focus:outline-none focus-ring-accent">Contact</a>
+
+        <!-- Dark/Light Mode Toggle -->
+        <button id="theme-toggle" aria-label="Toggle dark mode"
+                class="ml-4 p-2 rounded-full bg-[var(--accent-primary)] text-[var(--bg-primary)]
+                       hover:bg-[var(--accent-hover)] focus:outline-none focus-ring-accent transition-colors duration-300">
+          <svg id="sun-icon" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h1M3 12H2m15.364 6.364l-.707.707M6.343 6.343l-.707-.707m12.728 0l-.707-.707M6.343 17.657l-.707.707M16.243 7.757l.707-.707m-12.728 0l.707-.707M12 12a4 4 0 110-8 4 4 0 010 8z" />
+          </svg>
+          <svg id="moon-icon" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section id="hero" class="relative h-screen flex items-center justify-center text-[#202020] overflow-hidden pt-16 px-4 md:px-8 animate-fadeIn animate-slideUp" style="animation-delay: 0.1s;">
+  <section id="hero" class="relative h-screen flex items-center justify-center text-[var(--text-primary)] overflow-hidden pt-16 px-4 md:px-8 animate-fadeIn animate-slideUp" style="animation-delay: 0.1s;">
     <div class="absolute inset-0 z-0 opacity-10">
       <!-- Simple SVG background pattern for visual interest -->
       <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
         <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-          <path d="M 10 0 L 0 0 L 0 10" fill="none" stroke="#202020" stroke-width="0.1"></path>
+          <path d="M 10 0 L 0 0 L 0 10" fill="none" stroke="var(--text-primary)" stroke-width="0.1"></path>
         </pattern>
         <rect width="100%" height="100%" fill="url(#grid)"></rect>
       </svg>
@@ -146,9 +214,9 @@
     <div class="text-center z-10 p-6 max-w-5xl mx-auto flex flex-col-reverse md:flex-row-reverse items-center justify-center md:space-x-12 md:space-x-reverse">
       <!-- Text content -->
       <div class="md:w-2/3 text-center md:text-right mb-8 md:mb-0">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight rounded-xl p-3 md:p-4 hero-glass-text">Hi, I'm <span class="text-[#B28A79]">CALEB AMARTEY AMARH</span> 👋</h1>
-        <p class="text-lg sm:text-xl md:text-2xl mb-8 font-light rounded-xl p-3 md:p-4 hero-glass-text">A passionate Web Developer | Designer | Creator</p>
-        <a href="#projects" class="inline-block bg-[#B28A79] text-[#F0EDED] hover:bg-[#A07A69] px-6 py-2 md:px-8 md:py-3 rounded-full text-base md:text-lg font-semibold shadow-lg transform hover:scale-105 transition duration-300 ease-in-out focus:outline-none focus-ring-clay">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4 leading-tight rounded-xl p-3 md:p-4 hero-glass-text">Hi, I'm <span class="text-[var(--accent-primary)]">CALEB AMARTEY AMARH</span> 👋</h1>
+        <p class="text-lg sm:text-xl md:text-2xl mb-8 font-light rounded-xl p-3 md:p-4 hero-glass-text">A passionate Front-End Developer | IT Support | Aspiring Full Stack Engineer</p>
+        <a href="#projects" class="inline-block bg-[var(--accent-primary)] text-[var(--bg-primary)] hover:bg-[var(--accent-hover)] px-6 py-2 md:px-8 md:py-3 rounded-full text-base md:text-lg font-semibold shadow-lg transform hover:scale-105 transition duration-300 ease-in-out focus:outline-none focus-ring-accent">
           View My Work
         </a>
       </div>
@@ -156,7 +224,7 @@
       <div class="md:w-1/3 mb-6 md:mb-0">
         <img src="caleb-profile.jpg" alt="Your professional profile picture"
              class="w-56 h-56 md:w-80 md:h-80 object-cover rounded-lg shadow-lg mx-auto
-                    transform hover:scale-105 hover:-translate-x-2 transition duration-300 ease-in-out">
+                    transform hover:scale-105 hover:-translate-x-2 transition duration-300 ease-in-out border-4 border-[rgba(var(--text-primary-rgb),0.3)]">
       </div>
     </div>
   </section>
@@ -164,97 +232,181 @@
   <!-- About Me Section -->
   <section id="about" class="py-16 px-4 md:px-8 animate-fadeIn animate-slideUp" style="animation-delay: 0.2s;">
     <div class="container mx-auto max-w-4xl">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-[#202020] mb-12 relative pb-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)] mb-12 relative pb-4">
         About Me
-        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[#B28A79] rounded-full"></span>
+        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[var(--accent-primary)] rounded-full"></span>
       </h2>
-      <div class="glassmorphism p-6 md:p-10 rounded-xl flex flex-col md:flex-row items-center md:space-x-10 text-[#202020]">
+      <div class="glassmorphism p-6 md:p-10 rounded-xl flex flex-col md:flex-row items-center md:space-x-10 text-[var(--text-primary)]">
         <div class="md:w-1/3 mb-8 md:mb-0">
-          <img src="caleb-profile.jpg" alt="Your professional photo" class="w-56 h-56 md:w-64 md:h-64 object-cover rounded-full shadow-lg mx-auto border-4 border-[#202020] border-opacity-30">
+          <!-- About Me Photo -->
+          <img src="caleb-profile.jpg" alt="Your professional photo" class="w-56 h-56 md:w-64 md:h-64 object-cover rounded-full shadow-lg mx-auto border-4 border-[rgba(var(--text-primary-rgb),0.3)]">
         </div>
         <div class="md:w-2/3 text-base md:text-lg leading-relaxed">
-          <p class="mb-4">Hello! I'm Your Caleb Amartey Amarh, a dedicated web developer with a passion for creating impactful and user-friendly digital experiences. With 3 years of experience, I specialize in building responsive and dynamic web applications using modern technologies.</p>
-          <p class="mb-4">My journey into web development began with a fascination for how technology can solve real-world problems and bring ideas to life. I thrive on continuous learning and am always exploring new tools and techniques to enhance my skills.</p>
-          <p>When I'm not coding, you can find me watching movies. I believe in clean code, elegant design, and collaborative teamwork.</p>
+          <h3 class="text-2xl font-bold mb-4">Professional Summary</h3>
+          <p class="mb-4">
+            Front-end developer with 3 years of experience in IT support, networking, and cybersecurity. Currently
+            pursuing a BSc in Computer Science and Engineering at UMaT. Passionate about creating modern,
+            responsive web applications and building scalable systems. Experienced in developing portfolio
+            and business websites, with a strong foundation in JavaScript, React, and backend technologies.
+            Dedicated to continuous learning, teamwork, and delivering impactful digital solutions.
+          </p>
+
+          <h3 class="text-2xl font-bold mb-4">Work Experience</h3>
+          <p class="mb-4">
+            As an Intern & IT Assistant at ECG (2024-2025), I managed networking infrastructure, resolved system issues, assisted with cybersecurity, and provided technical support. In my role as a Freelance Front-End Developer (2023-Present), I've developed portfolio and e-commerce websites, designed admin portals, and built school websites, focusing on responsive UIs with HTML, Tailwind CSS, and JavaScript, while collaborating with clients to meet their needs.
+          </p>
+
+          <h3 class="text-2xl font-bold mb-4">Education</h3>
+          <h4 class="text-xl font-semibold mb-2">BSc Computer Science and Engineering</h4>
+          <p class="mb-2">University of Mines and Technology (UMaT), Tarkwa (2023 – Present)</p>
+          <ul class="list-disc list-inside mb-4 ml-4 space-y-1">
+            <li>Relevant coursework: Data Structures & Algorithms, Computer Networks, Database Systems, Software Engineering, Web Development.</li>
+            <li>Actively working on academic projects involving software development and cryptography.</li>
+          </ul>
+
+          <p class="mt-8">When I'm not coding, you can find me watching movies. I believe in clean code, elegant design, and collaborative teamwork.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <hr class="my-12 border-t-2 border-[var(--divider-color)] opacity-70 container mx-auto max-w-4xl" aria-hidden="true">
+
+  <!-- Resume/CV Section -->
+  <section id="resume" class="py-16 px-4 md:px-8 animate-fadeIn animate-slideUp" style="animation-delay: 0.25s;">
+    <div class="container mx-auto max-w-4xl text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)] mb-12 relative pb-4">
+        My Resume/CV
+        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[var(--accent-primary)] rounded-full"></span>
+      </h2>
+      <div class="glassmorphism p-6 md:p-10 rounded-xl text-[var(--text-primary)]">
+        <p class="text-base md:text-lg mb-8">
+          Download my full resume to learn more about my experience, skills, and qualifications.
+        </p>
+        <a href="Caleb_Amartey_Amarh_Detailed_CV.pdf" download="Caleb_Amarh_CV.pdf"
+           class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-sm
+                  bg-[var(--accent-primary)] text-[var(--bg-primary)] hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2
+                  focus:ring-[var(--accent-primary)] transition duration-300 ease-in-out transform hover:scale-105 focus-ring-accent">
+          <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          Download CV (PDF)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="my-12 border-t-2 border-[var(--divider-color)] opacity-70 container mx-auto max-w-4xl" aria-hidden="true">
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-16 px-4 md:px-8 animate-fadeIn animate-slideUp" style="animation-delay: 0.3s;">
+    <div class="container mx-auto max-w-4xl">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)] mb-12 relative pb-4">
+        My Skills
+        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[var(--accent-primary)] rounded-full"></span>
+      </h2>
+      <div class="glassmorphism p-6 md:p-10 rounded-xl text-[var(--text-primary)]">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Development & Tools</h3>
+            <ul class="list-disc list-inside ml-4 space-y-1">
+              <li>Frontend Development: HTML, Tailwind CSS, JavaScript, React.js</li>
+              <li>Backend Development: Node.js, Express.js, MongoDB (learning)</li>
+              <li>Other Tools: Git/GitHub, UI/UX Prototyping</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Technical & Soft Skills</h3>
+            <ul class="list-disc list-inside ml-4 space-y-1">
+              <li>Technical: Networking & Cybersecurity, IT Support</li>
+              <li>Soft Skills: Problem-solving, Communication, Teamwork, Adaptability</li>
+              <li>Languages: English (fluent), Twi (native), Fante (native)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="my-12 border-t-2 border-[var(--divider-color)] opacity-70 container mx-auto max-w-4xl" aria-hidden="true">
+
   <!-- Project Section -->
   <section id="projects" class="py-16 px-4 md:px-8 animate-fadeIn animate-slideUp" style="animation-delay: 0.3s;">
     <div class="container mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-[#202020] mb-12 relative pb-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)] mb-12 relative pb-4">
         My Projects
-        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[#B28A79] rounded-full"></span>
+        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[var(--accent-primary)] rounded-full"></span>
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- Project Card: Central Educational Foundation -->
-        <div class="project-glass-card rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-[#202020]">
-          <img src="project1.png" alt="Preview of Central Educational Foundation website" class="w-full h-48 object-cover rounded-t-xl transform hover:scale-105 transition duration-300 ease-in-out">
+        <!-- Project Card 1: Leadbryte Solutions Portfolio Website -->
+        <div class="project-glass-card rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-[var(--text-primary)]">
+          <img src="leadbryte.png" alt="Preview of Leadbryte Solutions Portfolio Website" class="w-full h-48 object-cover rounded-t-xl transform hover:scale-105 transition duration-300 ease-in-out">
           <div class="p-6">
-            <h3 class="text-xl md:text-2xl font-semibold mb-2">Central Educational Foundation</h3>
-            <p class="text-sm md:text-base mb-4">A comprehensive website for an educational foundation, featuring information about programs, admissions, and resources. Designed for clarity and easy navigation for students and parents.</p>
+            <h3 class="text-xl md:text-2xl font-semibold mb-2">Leadbryte Solutions Portfolio</h3>
+            <p class="text-sm md:text-base mb-4">Developed and deployed a compelling professional portfolio website for Leadbryte Solutions, effectively showcasing their services, client testimonials, and successful past projects to a broad audience, enhancing their digital presence and client acquisition efforts.</p>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">HTML</span>
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">CSS</span>
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">JavaScript</span>
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">Responsive Design</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">Web Design</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">HTML</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">CSS</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">JavaScript</span>
             </div>
-            <a href="https://central-educational-foundation.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-[#B28A79] hover:text-[#A07A69] font-medium inline-flex items-center focus:outline-none focus-ring-clay" aria-label="View Central Educational Foundation website">
+            <a href="#" target="_blank" rel="noopener noreferrer" class="text-[var(--accent-primary)] hover:text-[var(--accent-hover)] font-medium inline-flex items-center focus:outline-none focus-ring-accent" aria-label="View Leadbryte Solutions Portfolio">
               View Project
               <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
           </div>
         </div>
 
-        <!-- Project Card: The Everything Shop -->
-        <div class="project-glass-card rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-[#202020]">
-          <img src="project2.png" alt="Preview of The Everything Shop ecommerce website" class="w-full h-48 object-cover rounded-t-xl transform hover:scale-105 transition duration-300 ease-in-out">
+        <!-- Project Card 2: E-commerce Platform -->
+        <div class="project-glass-card rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-[var(--text-primary)]">
+          <img src="project2.png" alt="Preview of E-commerce Platform" class="w-full h-48 object-cover rounded-t-xl transform hover:scale-105 transition duration-300 ease-in-out">
           <div class="p-6">
-            <h3 class="text-xl md:text-2xl font-semibold mb-2">The Everything Shop</h3>
-            <p class="text-sm md:text-base mb-4">A modern e-commerce platform designed for seamless product browsing, secure checkout, and user-friendly interface. Optimized for various screen sizes to provide an engaging shopping experience.</p>
+            <h3 class="text-xl md:text-2xl font-semibold mb-2">E-commerce Platform</h3>
+            <p class="text-sm md:text-base mb-4">Built a modern, responsive shopping site with a seamless product browsing experience, secure order processing, and a basic recommendation system.</p>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">React</span>
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">Frontend</span>
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">Responsive Design</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">React</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">Frontend</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">Responsive Design</span>
             </div>
-            <a href="https://the-everything-shop.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-[#B28A79] hover:text-[#A07A69] font-medium inline-flex items-center focus:outline-none focus-ring-clay" aria-label="View The Everything Shop ecommerce website">
+            <a href="https://the-everything-shop.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-[var(--accent-primary)] hover:text-[var(--accent-hover)] font-medium inline-flex items-center focus:outline-none focus-ring-accent" aria-label="View E-commerce Platform">
               View Project
               <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
           </div>
         </div>
 
-        <!-- Project Card: Foundation Website -->
-        <div class="project-glass-card rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-[#202020]">
-          <img src="foundation page .png" alt="Preview of Generic Project 3" class="w-full h-48 object-cover rounded-t-xl transform hover:scale-105 transition duration-300 ease-in-out">
+        <!-- Project Card 3: School Websites -->
+        <div class="project-glass-card rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-[var(--text-primary)]">
+          <img src="project1.png" alt="Preview of School Websites" class="w-full h-48 object-cover rounded-t-xl transform hover:scale-105 transition duration-300 ease-in-out">
           <div class="p-6">
-            <h3 class="text-xl md:text-2xl font-semibold mb-2">Amartey's Foundation Website</h3>
-            <p class="text-sm md:text-base mb-4">A responsive website built with a mobile-first approach, showcasing the capabilities of the Foundation framework.</p>
+            <h3 class="text-xl md:text-2xl font-semibold mb-2">School Websites</h3>
+            <p class="text-sm md:text-base mb-4">Developed multiple websites for educational institutions, incorporating features for event listings, student information, and administrative management.</p>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">React</span>
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">Tailwind CSS</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">HTML</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">CSS</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">JavaScript</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">CMS Integration</span>
             </div>
-            <a href="https://foundation-website-seven.vercel.app/" class="text-[#B28A79] hover:text-[#A07A69] font-medium inline-flex items-center focus:outline-none focus-ring-clay" aria-label="View Project Two">
+            <a href="https://central-educational-foundation.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-[var(--accent-primary)] hover:text-[var(--accent-hover)] font-medium inline-flex items-center focus:outline-none focus-ring-accent" aria-label="View School Websites Example">
               View Project
               <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
           </div>
         </div>
 
-        <!-- Project Card: LeadBryte Solutions -->
-        <div class="project-glass-card rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-[#202020]">
-          <img src="leadbryte.png" alt="Preview of LeadBryte Solutions" class="w-full h-48 object-cover rounded-t-xl transform hover:scale-105 transition duration-300 ease-in-out">
+        <!-- Project Card 4: General Foundation Website -->
+        <div class="project-glass-card rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden text-[var(--text-primary)]">
+          <img src="foundation-page.png" alt="Preview of General Foundation Website" class="w-full h-48 object-cover rounded-t-xl transform hover:scale-105 transition duration-300 ease-in-out">
           <div class="p-6">
-            <h3 class="text-xl md:text-2xl font-semibold mb-2">LeadBryte Solutions</h3>
-            <p class="text-sm md:text-base mb-4">An engaging description of LeadBryte Solutions.</p>
+            <h3 class="text-xl md:text-2xl font-semibold mb-2">General Foundation Website</h3>
+            <p class="text-sm md:text-base mb-4">Developed a dedicated web presence for a non-profit foundation, designed to inform visitors about its mission, impact, and ways to get involved, with clear calls to action and accessibility.</p>
             <div class="flex flex-wrap gap-2 mb-4">
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">Vue.js</span>
-              <span class="bg-[#B28A79] bg-opacity-30 text-[#202020] text-xs font-medium px-2.5 py-0.5 rounded-full">Node.js</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">HTML</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">CSS</span>
+              <span class="bg-[rgba(var(--accent-primary-rgb),0.3)] text-[var(--text-primary)] text-xs font-medium px-2.5 py-0.5 rounded-full">Responsive</span>
             </div>
-            <a href="https://lead-bryte-solutions-v5r3.vercel.app/" class="text-[#B28A79] hover:text-[#A07A69] font-medium inline-flex items-center focus:outline-none focus-ring-clay" aria-label="View Project Three">
+            <a href="https://foundation-website-seven.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-[var(--accent-primary)] hover:text-[var(--accent-hover)] font-medium inline-flex items-center focus:outline-none focus-ring-accent" aria-label="View General Foundation Website">
               View Project
               <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </a>
@@ -268,27 +420,27 @@
   <!-- Contact Section -->
   <section id="contact" class="py-16 px-4 md:px-8 animate-fadeIn animate-slideUp" style="animation-delay: 0.4s;">
     <div class="container mx-auto max-w-2xl">
-      <h2 class="text-3xl md:text-4xl font-bold text-center text-[#202020] mb-12 relative pb-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--text-primary)] mb-12 relative pb-4">
         Get in Touch
-        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[#B28A79] rounded-full"></span>
+        <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-[var(--accent-primary)] rounded-full"></span>
       </h2>
-      <div class="contact-glass-form rounded-xl p-6 md:p-8 text-[#202020]">
+      <div class="contact-glass-form rounded-xl p-6 md:p-8 text-[var(--text-primary)]">
         <p class="text-base md:text-lg text-center mb-6">Have a question or want to work together? Feel free to reach out!</p>
         <form id="contactForm" class="space-y-6">
           <div>
             <label for="name" class="block text-sm font-medium mb-1">Name</label>
-            <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-2 border border-[#202020] border-opacity-30 rounded-md shadow-sm bg-white bg-opacity-10 text-[#202020] placeholder-[#808080] focus:ring-[#B28A79] focus:border-[#B28A79] sm:text-sm focus-ring-clay" placeholder="Your Name" aria-label="Your Name" required>
+            <input type="text" id="name" name="name" class="mt-1 block w-full px-4 py-2 border border-[rgba(var(--text-primary-rgb),0.3)] rounded-md shadow-sm bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--input-placeholder)] focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] sm:text-sm focus-ring-accent" placeholder="Your Name" aria-label="Your Name" required>
           </div>
           <div>
             <label for="email" class="block text-sm font-medium mb-1">Email</label>
-            <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-[#202020] border-opacity-30 rounded-md shadow-sm bg-white bg-opacity-10 text-[#202020] placeholder-[#808080] focus:ring-[#B28A79] focus:border-[#B28A79] sm:text-sm focus-ring-clay" placeholder="your.email@example.com" aria-label="Your Email" required>
+            <input type="email" id="email" name="email" class="mt-1 block w-full px-4 py-2 border border-[rgba(var(--text-primary-rgb),0.3)] rounded-md shadow-sm bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--input-placeholder)] focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] sm:text-sm focus-ring-accent" placeholder="your.email@example.com" aria-label="Your Email" required>
           </div>
           <div>
             <label for="message" class="block text-sm font-medium mb-1">Message</label>
-            <textarea id="message" name="message" rows="5" class="mt-1 block w-full px-4 py-2 border border-[#202020] border-opacity-30 rounded-md shadow-sm bg-white bg-opacity-10 text-[#202020] placeholder-[#808080] focus:ring-[#B28A79] focus:border-[#B28A79] sm:text-sm focus-ring-clay" placeholder="Your message..." aria-label="Your Message" required></textarea>
+            <textarea id="message" name="message" rows="5" class="mt-1 block w-full px-4 py-2 border border-[rgba(var(--text-primary-rgb),0.3)] rounded-md shadow-sm bg-[var(--input-bg)] text-[var(--text-primary)] placeholder-[var(--input-placeholder)] focus:ring-[var(--accent-primary)] focus:border-[var(--accent-primary)] sm:text-sm focus-ring-accent" placeholder="Your message..." aria-label="Your Message" required></textarea>
           </div>
           <div class="text-center">
-            <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-[#F0EDED] bg-[#B28A79] hover:bg-[#A07A69] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#B28A79] transition duration-300 ease-in-out transform hover:scale-105 focus-ring-clay">
+            <button type="submit" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-[var(--bg-primary)] bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-primary)] transition duration-300 ease-in-out transform hover:scale-105 focus-ring-accent">
               Send Message
               <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </button>
@@ -300,17 +452,17 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-[#202020] text-[#C7BFB8] py-8 px-4 md:px-8">
+  <footer class="bg-[var(--footer-bg)] text-[var(--footer-text)] py-8 px-4 md:px-8">
     <div class="container mx-auto text-center">
       <p>&copy; <span id="current-year"></span> CALEB AMARTEY AMARH. All rights reserved.</p>
       <div class="flex justify-center space-x-6 mt-4">
-        <a href="https://www.linkedin.com/in/caleb-amarh-b82364274/" class="text-[#C7BFB8] hover:text-[#F0EDED] transition duration-300 focus:outline-none focus-ring-clay" aria-label="Link to LinkedIn profile">
+        <a href="https://www.linkedin.com/in/caleb-amarh-b82364274/" target="_blank" rel="noopener noreferrer" class="text-[var(--footer-text)] hover:text-[var(--bg-primary)] transition duration-300 focus:outline-none focus-ring-accent" aria-label="Link to LinkedIn profile">
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <!-- LinkedIn Icon (example) -->
             <path fill-rule="evenodd" d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8.298 21.75H5.424V9h2.874v12.75zM6.861 7.7C5.817 7.7 5 6.896 5 5.861 5 4.826 5.817 4 6.861 4S8.722 4.826 8.722 5.861C8.722 6.896 7.905 7.7 6.861 7.7zM19.75 21.75h-2.874v-5.7c0-1.353-.024-3.1-1.896-3.1-1.9 0-2.19 1.48-2.19 3.012v5.788H9.916V9h2.756v1.27h.04c.38-.722 1.306-1.48 2.695-1.48 2.876 0 3.41 1.892 3.41 4.36V21.75h-.01z" clip-rule="evenodd" />
           </svg>
         </a>
-        <a href="https://github.com/CalebAma" class="text-[#C7BFB8] hover:text-[#F0EDED] transition duration-300 focus:outline-none focus-ring-clay" aria-label="Link to GitHub profile">
+        <a href="https://github.com/CalebAma" target="_blank" rel="noopener noreferrer" class="text-[var(--footer-text)] hover:text-[var(--bg-primary)] transition duration-300 focus:outline-none focus-ring-accent" aria-label="Link to GitHub profile">
           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <!-- GitHub Icon (example) -->
             <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.865-.013-1.706-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.109-1.465-1.109-1.465-.908-.618.069-.606.069-.606 1.004.072 1.531 1.032 1.531 1.032.892 1.529 2.341 1.088 2.91.832.09-.644.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.949 0-1.096.39-1.988 1.03-2.692-.104-.253-.448-1.274.098-2.651 0 0 .84-.27 2.75 1.025A9.456 9.456 0 0112 6.843c.85.004 1.7.112 2.49.324 1.909-1.295 2.748-1.025 2.748-1.025.546 1.377.202 2.398.098 2.651.64.704 1.029 1.596 1.029 2.692 0 3.845-2.339 4.692-4.566 4.943.359.309.678.914.678 1.846 0 1.33-.012 2.414-.012 2.744 0 .268.18.577.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.523 2 12 2z" clip-rule="evenodd" />
@@ -327,7 +479,7 @@
 
     // Initialize Supabase client
     const SUPABASE_URL = 'https://biwkxhgcawtdzmaogrdc.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpd2t4aGdjYXd0ZHptYW9ncmRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNDMyNDcsImV4cCI6MjA3MDYxOTI0N30.fsvfqW1CcNHKF6UpnKkrKNw_bazkpkC16GedribIJl8';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpd2t4aGdjYXd0ZHptYW9ncmRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTUwNDMyNDcsImexcl0.fsvfqW1CcNHKF6UpnKkrKNw_bazppkC16GedribIJl8';
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     // Get references to elements
@@ -386,6 +538,38 @@
         // Re-enable button
         submitButton.disabled = false;
         submitButton.innerHTML = 'Send Message <svg class="ml-2 -mr-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>';
+      }
+    });
+
+    // Dark/Light Mode Toggle Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
+
+    // On page load, check local storage for theme preference
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      sunIcon.classList.remove('hidden');
+      moonIcon.classList.add('hidden');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      sunIcon.classList.add('hidden');
+      moonIcon.classList.remove('hidden');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      let theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
       }
     });
 
